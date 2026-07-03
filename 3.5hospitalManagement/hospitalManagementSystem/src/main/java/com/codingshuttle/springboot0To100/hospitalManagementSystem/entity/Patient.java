@@ -36,7 +36,7 @@ public class Patient {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToOne(cascade  = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "patient_insurance", unique = true)
     private Insurance insurance; // owning side
 

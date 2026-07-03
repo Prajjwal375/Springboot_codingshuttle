@@ -22,20 +22,19 @@ public class PatientServiceTest {
     public void testPatient() {
 //        List<Patient> patientList = patientRepository.findAll();
 //        List<CPatientInfo> patientList = patientRepository.getAllPatientsInfoConcrete();
-//        List<BloodGroupStats> patientList = patientRepository.getBloodGroupStats();
-//
+//     List<BloodGroupStats> patientList = patientRepository.getBloodGroupStats();
 //        for(var p: patientList) {
 //            System.out.println(p);
 //        }
 
-//        int rowsAffected = patientRepository.updatePatientNameWithId("Anuj Sharma", 1L);
+        int rowsAffected = patientRepository.updatePatientNameWithId("Anuj Sharma", 1L);
+
+        System.out.println(rowsAffected);
+
+//        List<Patient> patientList = patientRepository.getAllPatientsWithAppointments();
 //
-//        System.out.println(rowsAffected);
-
-        List<Patient> patientList = patientRepository.getAllPatientsWithAppointments();
-
-        for(var p: patientList) {
-            System.out.println(p);
-        }
+//        for(var p: patientList) {
+//            System.out.println(p);
+//        }
     }
 }
