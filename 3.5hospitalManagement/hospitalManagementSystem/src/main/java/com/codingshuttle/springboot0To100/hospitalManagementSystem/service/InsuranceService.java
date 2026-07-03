@@ -21,7 +21,7 @@ public class InsuranceService {
 
         patient.setInsurance(insurance); // dirty patient
 
-        insurance.setPatient(patient); //optional,
+        insurance.setPatient(patient); //optional,  to maintain bidirectional dependency
         return insurance;
     }
 
