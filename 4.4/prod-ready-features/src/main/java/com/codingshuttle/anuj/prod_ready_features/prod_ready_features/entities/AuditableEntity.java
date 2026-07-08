@@ -1,12 +1,11 @@
-package com.prajvalsaki.prod_ready_features.prod_ready_features.entities;
+package com.codingshuttle.anuj.prod_ready_features.prod_ready_features.entities;
 
-
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+import jakarta.persistence.Column;
+import jakarta.persistence.EntityListeners;
+import jakarta.persistence.MappedSuperclass;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Audited;
+import org.hibernate.envers.Audited;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -15,30 +14,24 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "posts")
-@AllArgsConstructor
-@NoArgsConstructor
+@MappedSuperclass
 @Getter
 @Setter
 @EntityListeners(AuditingEntityListener.class)
 @Audited
-public class PostEntity extends AuditableEntity { // just extends entity to make it auditable
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    private String title;
-
-    private String description;
+public class AuditableEntity {
 
     @CreatedDate
-    @Column(updatable = false,nullable = false)
+    @Column(nullable = false, updatable = false)
     private LocalDateTime createdDate;
+
     @LastModifiedDate
     private LocalDateTime updatedDate;
+
     @CreatedBy
     private String createdBy;
+
     @LastModifiedBy
     private String updatedBy;
+
 }

@@ -1,19 +1,18 @@
-package com.prajvalsaki.prod_ready_features.prod_ready_features.config;
+package com.codingshuttle.anuj.prod_ready_features.prod_ready_features.config;
 
-import com.prajvalsaki.prod_ready_features.prod_ready_features.auth.AuditorAwareImpl;
+import com.codingshuttle.anuj.prod_ready_features.prod_ready_features.auth.AuditorAwareImpl;
 import org.modelmapper.ModelMapper;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.domain.AuditorAware;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 @Configuration
-@EnableJpaAuditing(auditorAwareRef = "getAuditorAwareImpl")  // jpa attached to auditor
-
+@EnableJpaAuditing(auditorAwareRef = "getAuditorAwareImpl")
 public class AppConfig {
+
     @Bean
-    ModelMapper newmodelMapper() {
+    ModelMapper getModelMapper() {
         return new ModelMapper();
     }
 

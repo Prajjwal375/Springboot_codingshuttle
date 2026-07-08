@@ -1,9 +1,9 @@
-package com.prajvalsaki.prod_ready_features.prod_ready_features.services;
+package com.codingshuttle.anuj.prod_ready_features.prod_ready_features.services;
 
-import com.prajvalsaki.prod_ready_features.prod_ready_features.dto.PostDTO;
-import com.prajvalsaki.prod_ready_features.prod_ready_features.entities.PostEntity;
-import com.prajvalsaki.prod_ready_features.prod_ready_features.exceptions.ResourceNotFoundException;
-import com.prajvalsaki.prod_ready_features.prod_ready_features.repositories.PostRepository;
+import com.codingshuttle.anuj.prod_ready_features.prod_ready_features.dto.PostDTO;
+import com.codingshuttle.anuj.prod_ready_features.prod_ready_features.entities.PostEntity;
+import com.codingshuttle.anuj.prod_ready_features.prod_ready_features.exceptions.ResourceNotFoundException;
+import com.codingshuttle.anuj.prod_ready_features.prod_ready_features.repositories.PostRepository;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -11,26 +11,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
-
 @Service @RequiredArgsConstructor
-public class postServiceImpl implements PostService{
+public class PostServiceImpl implements PostService{
 
     private final PostRepository postRepository;
     private final ModelMapper modelMapper;
-
-    @Override
-    public PostDTO getPostById(Long postId) {
-        PostEntity postEntity = postRepository
-                .findById(postId)
-                .orElseThrow(()-> new ResourceNotFoundException("post not found with id"+postId));
-        return modelMapper.map(postEntity, PostDTO.class);
-    }
-
-    @Override
-    public PostDTO updatePost(PostDTO inputPost) {
-        return null;
-    }
 
     @Override
     public List<PostDTO> getAllPosts() {
@@ -42,9 +27,17 @@ public class postServiceImpl implements PostService{
     }
 
     @Override
-    public PostDTO createPost(PostDTO inputPost) {
+    public PostDTO createNewPost(PostDTO inputPost) {
         PostEntity postEntity = modelMapper.map(inputPost, PostEntity.class);
         return modelMapper.map(postRepository.save(postEntity), PostDTO.class);
+    }
+
+    @Override
+    public PostDTO getPostById(Long postId) {
+        PostEntity postEntity = postRepository
+                .findById(postId)
+                .orElseThrow(() -> new ResourceNotFoundException("Post not found with id "+postId));
+        return modelMapper.map(postEntity, PostDTO.class);
     }
 
     @Override

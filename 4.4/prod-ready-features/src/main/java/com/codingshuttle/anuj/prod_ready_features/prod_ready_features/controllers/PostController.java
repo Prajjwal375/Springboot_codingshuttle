@@ -1,9 +1,8 @@
-package com.prajvalsaki.prod_ready_features.prod_ready_features.controllers;
+package com.codingshuttle.anuj.prod_ready_features.prod_ready_features.controllers;
 
-import com.prajvalsaki.prod_ready_features.prod_ready_features.dto.PostDTO;
-import com.prajvalsaki.prod_ready_features.prod_ready_features.services.PostService;
+import com.codingshuttle.anuj.prod_ready_features.prod_ready_features.dto.PostDTO;
+import com.codingshuttle.anuj.prod_ready_features.prod_ready_features.services.PostService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,13 +25,14 @@ public class PostController {
     }
 
     @PostMapping
-    public PostDTO createPost(@RequestBody PostDTO inputPost) {
-        return postService.createPost(inputPost);
+    public PostDTO createNewPost(@RequestBody PostDTO inputPost) {
+        return postService.createNewPost(inputPost);
     }
 
     @PutMapping("{postId}")
-    public PostDTO updatePost(@RequestBody PostDTO inputPost) {
-        return postService.updatePost(inputPost);
+    public PostDTO updatePost(@RequestBody PostDTO inputPost,@PathVariable Long postId ) {
+        return postService.updatePost(inputPost, postId);
     }
+
 
 }
