@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "/audit")
-public class AuditController {
+public class  AuditController {
 
     @Autowired
     private EntityManagerFactory entityManagerFactory;

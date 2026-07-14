@@ -7,11 +7,15 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+// Without it, Spring doesn't know this class should handle HTTP requests.
 @RestController
 @RequestMapping(path = "/posts")
 @RequiredArgsConstructor
 public class PostController {
-
+    // @RequestBody
+    //It's not in the URL.
+    //It's inside the request body.
+//Now suppose you want to create a new employee.
     private final PostService postService;
 
     @GetMapping
@@ -24,6 +28,7 @@ public class PostController {
         return postService.getPostById(postId);
     }
 
+    //We use @PathVariable to read a value from the URL path.
     @PostMapping
     public PostDTO createNewPost(@RequestBody PostDTO inputPost) {
         return postService.createNewPost(inputPost);
