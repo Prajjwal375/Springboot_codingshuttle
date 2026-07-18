@@ -7,8 +7,12 @@ import com.example.demo4.SecurityApp.entities.User;
 import com.example.demo4.SecurityApp.exceptions.ResourceNotFoundException;
 import com.example.demo4.SecurityApp.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -24,6 +28,8 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
+//    private final AuthenticationManager authenticationManager;
+//    private final JwtService jwtService;
 
     // implement methods
     @Override
@@ -32,6 +38,7 @@ public class UserService implements UserDetailsService {
                 .orElseThrow(() -> new BadCredentialsException("User with email "+ username +" not found"));
     }
 
+    // for jwt filter
     public User getUserById(Long userId) {
         return userRepository.findById(userId).orElseThrow(() -> new ResourceNotFoundException("User with id "+ userId +
                 " not found"));
@@ -42,6 +49,9 @@ public class UserService implements UserDetailsService {
     }
 
 
+
+    // signup
+    // 1) check if user is present or not
     public UserDto signUp(SignUpDto signUpDto) {
         Optional<User> user = userRepository.findByEmail(signUpDto.getEmail());
         if(user.isPresent()) {
@@ -59,6 +69,7 @@ public class UserService implements UserDetailsService {
         return userRepository.save(newUser);
     }
 }
+
 
 
 

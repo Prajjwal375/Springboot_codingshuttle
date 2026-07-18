@@ -52,7 +52,10 @@ public class WebSecurityConfig {
                 .csrf(csrfConfig -> csrfConfig.disable())  // if we want csrf token disable
                 .sessionManagement(sessionConfig -> sessionConfig
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+
+                // pass the jwt filter aa your own filter
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
+
                 .oauth2Login(oauth2Config -> oauth2Config
                         .failureUrl("/login?error=true")
                         .successHandler(oAuth2SuccessHandler)
@@ -64,23 +67,24 @@ public class WebSecurityConfig {
     }
 
 
-
+    // this bean i only useful for test only..
     // if i want more testing user(admin)
-    @Bean
-    UserDetailsService myInMemoryUserDetailsService() {
-        UserDetails normalUser = User
-                .withUsername("prajval")
-                .password(passwordEncoder().encode("prajjwal123"))
-                .roles("USER")
-                .build();
 
-        UserDetails adminUser = User
-                .withUsername("admin")
-                .password(passwordEncoder().encode("admin"))
-                .roles("ADMIN")
-                .build();
-        return new InMemoryUserDetailsManager(Arrays.asList(normalUser, adminUser));
-    }
+//    @Bean
+//    UserDetailsService myInMemoryUserDetailsService() {
+//        UserDetails normalUser = User
+//                .withUsername("prajval")
+//                .password(passwordEncoder().encode("prajjwal123"))
+//                .roles("USER")
+//                .build();
+//
+//        UserDetails adminUser = User
+//                .withUsername("admin")
+//                .password(passwordEncoder().encode("admin"))
+//                .roles("ADMIN")
+//                .build();
+//        return new InMemoryUserDetailsManager(Arrays.asList(normalUser, adminUser));
+//    }
 
     @Bean
     PasswordEncoder passwordEncoder() {

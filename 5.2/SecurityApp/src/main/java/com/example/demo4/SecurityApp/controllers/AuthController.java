@@ -1,3 +1,7 @@
+//TWO Api \
+// 1) for signup
+
+
 package com.example.demo4.SecurityApp.controllers;
 
 import com.example.demo4.SecurityApp.dto.LoginDto;
@@ -31,6 +35,7 @@ public class AuthController {
     @Value("${deploy.env}")
     private String deployEnv;
 
+    // signup APi call
     @PostMapping("/signup")
     public ResponseEntity<UserDto> signUp(@RequestBody SignUpDto signUpDto) {
         UserDto userDto = userService.signUp(signUpDto);
